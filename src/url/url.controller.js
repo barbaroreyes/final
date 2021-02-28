@@ -1,7 +1,7 @@
 const urls = require("../data/urls-data")
 const uses = require("../data/uses-data")
 
-function recorded(req, res, next){
+const recorded =(req, res, next) =>{
    const  urlId  = Number(req.params.urlId);
    const record = {
     id: uses.length + 1,
@@ -12,7 +12,7 @@ function recorded(req, res, next){
      next()
 }
 
-function read(req, res, next){
+const read = (req, res, next)=>{
   const { urlId } = req.params;
   const foundId = urls.find((url) => url.id == urlId);
   if(!foundId){
@@ -21,8 +21,7 @@ function read(req, res, next){
   res.status(200).json({ data: foundId })
 }
 
-
-function put(req, res, next){
+const put =(req, res, next) => {
   const { data: { href, id } } = req.body
  
   const foundId = urls.find((url) => url.id == id);
@@ -36,11 +35,11 @@ function put(req, res, next){
   res.status(200).json({ data: foundId })
 }
 
-function list(req, res, next){  
+const list = (req, res, next)=>{  
   res.status(200).json({ data: urls })
 }
 
-function create(req, res, next){
+const create = (req, res, next)=>{
  const  { data: { href } }  = req.body;
   console.log(href, req.body, "tests")
   if (!href){
@@ -55,7 +54,7 @@ function create(req, res, next){
    res.status(201).json({ data: newUrlData })
 }
 
-function checkUrlId(req, res, next){
+const checkUrlId =(req, res, next)=>{
   const { urlId } = req.params;
   const foundId = urls.find((url) => url.id == urlId);
   if(!foundId){
@@ -63,13 +62,6 @@ function checkUrlId(req, res, next){
   }
   next()
 }
-
-
-
-
-
-
-
 
 module.exports = {
   list:  list,
